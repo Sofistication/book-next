@@ -1,2 +1,16 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'pallette';
+
+body {
+  padding: 0;
+}
+
+header {
+  background-color: $primary-color;
+  text-align: center;
+}
+
+nav {
+  background-color: $primary-color-dark;
+}
