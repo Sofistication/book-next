@@ -1,9 +1,11 @@
 <h2>Your Reading List</h2>
 
-{{#each books as |book|}}
+<ul class="book-list">
+  {{#each books as |book|}}
 
-  {{> list-entry book=book}}
+    {{> list-entry book=book}}
 
-{{/each}}
+  {{/each}}
+</ul>
 
 {{> create-book-modal}}
