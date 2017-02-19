@@ -3,14 +3,27 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import 'pallette';
 
 body {
+  background-color: $primary-color;
   padding: 0;
 }
 
 header {
-  background-color: $primary-color;
+  background-color: $primary-color-light;
+  color: $primary-text-color;
   text-align: center;
 }
 
 nav {
-  background-color: $primary-color-dark;
+  background-color: $divider-color;
+  margin: 0;
+}
+
+main {
+  background-color: $primary-color;
+}
+
+.list-container {
+  background-color: $accent-color;
+  margin: 0 auto;
+  max-width: 600px;
 }
