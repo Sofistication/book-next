@@ -2,14 +2,7 @@
 
 {{#each books as |book|}}
 
-  <ul class="book-list" data-id="{{book.id}}">
-    <li> <h4>Title: {{book.title}}</h4></li>
-    {{#if book.description}}
-      <li>{{book.description}}</li>
-    {{else}}
-      <li>No description.</li>
-    {{/if}}
-  </ul>
+  {{> list-entry book=book}}
 
 {{/each}}
 
