@@ -4,9 +4,11 @@
 
 const api = require('./api');
 const ui = require('./ui');
+const store = require('../store');
 
 const onGetList = function (event) {
   event.preventDefault();
+  store.activeScreen = 'list';
   api.getLists()
     .then(ui.onSuccess)
     .catch(ui.onFailure);
@@ -14,6 +16,7 @@ const onGetList = function (event) {
 
 const onGetBooks = function (event) {
   event.preventDefault();
+  store.activeScreen = 'explore';
   api.indexBooks()
     .then(ui.onSuccess)
     .catch(ui.onFailure);

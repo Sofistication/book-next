@@ -3,6 +3,7 @@ const getFormFields = require('../../../lib/get-form-fields');
 
 const api = require('./api');
 const utils = require('../utils');
+const store = require('../store');
 
 const displayList = require('../templates/display-list.handlebars');
 const listEntry = require('../templates/list-entry.handlebars');
@@ -24,8 +25,15 @@ const onFailure = function (error) {
 const onSuccess = function (data) {
   // clear out any previous list that might be present
   $('#list').html('');
+  // set appropriate page title
+  if (store.activeScreen === 'list') {
+    $('#list').append('<h2>Your Reading List</h2>');
+  } else if (store.activeScreen === 'explore') {
+    $('#list').append('<h2>Explore Books!</h2>');
+  }
+
   // construct html for list to display based on response from server
-  let bookListHtml = displayList({ books: data.books });
+  let bookListHtml = displayList({ books: data.books, });
   // inject new html into list container
   $('#list').append(bookListHtml);
 
