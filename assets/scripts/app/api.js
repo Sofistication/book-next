@@ -20,7 +20,19 @@ const getLists = function () {
   });
 };
 
+const createBook = function (data) {
+  return $.ajax({
+    url: config.apiOrigin + '/books',
+    method: 'POST',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
+    },
+    data,
+  });
+};
+
 module.exports = {
   indexBooks,
-  getLists
+  getLists,
+  createBook,
 };
