@@ -15,7 +15,6 @@ const onCreationSuccess = function (data) {
   let newBookHtml = listEntry({ book: data.book });
   // add new entry to list
   $('#bookList').append(newBookHtml);
-  console.log(data);
 };
 
 const onFailure = function (error) {
@@ -23,7 +22,6 @@ const onFailure = function (error) {
 };
 
 const onSuccess = function (data) {
-  console.log(data);
   // clear out any previous list that might be present
   $('#list').html('');
   // construct html for list to display based on response from server

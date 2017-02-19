@@ -12,6 +12,13 @@ const onGetList = function (event) {
     .catch(ui.onFailure);
 };
 
+const onGetBooks = function (event) {
+  event.preventDefault();
+  api.indexBooks()
+    .then(ui.onSuccess)
+    .catch(ui.onFailure);
+};
+
 // const onCreateBook = function (event) {
 //   event.preventDefault();
 //   let data = getFormFields(event.target);
@@ -22,9 +29,9 @@ const onGetList = function (event) {
 
 const addHandlers = () => {
   $('#get-list').on('click', onGetList);
+  $('#explore-books').on('click', onGetBooks);
 };
 
 module.exports = {
   addHandlers,
-  // onCreateBook,
 };
