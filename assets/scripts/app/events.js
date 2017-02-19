@@ -5,7 +5,7 @@ const ui = require('./ui');
 
 const onGetList = function (event) {
   event.preventDefault();
-  api.indexBooks()
+  api.getLists()
     .then(ui.onSuccess)
     .catch(ui.onFailure);
 };
