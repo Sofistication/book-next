@@ -14,7 +14,7 @@ const onCreationSuccess = function (data) {
   // create new entry on list from successfully created book
   let newBookHtml = listEntry({ book: data.book });
   // add new entry to list
-  $('#book-list').append(newBookHtml);
+  $('#bookList').append(newBookHtml);
   console.log(data);
 };
 
