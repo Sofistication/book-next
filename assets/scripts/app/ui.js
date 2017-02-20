@@ -23,7 +23,6 @@ const onFailure = function (error) {
 };
 
 const onUpdateSuccess = function(data) {
-  console.log(data);
   let updatedBookHtml = listEntry({ book: data.book });
   $("ul[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
 };
@@ -57,9 +56,13 @@ const onSuccess = function (data) {
     event.preventDefault();
     let data = getFormFields(event.target);
     let bookId = event.target.dataset.book;
+    // $('#updateBookModal-' + bookId).modal('hide');
     api.updateBook(data, bookId)
       .then(function () {
-        $('.updateModal').modal('hide');
+        $('#updateBookModal-' + bookId).modal('hide');
+      })
+      .then(function () {
+        // $('.updateModal').modal('hide');
         api.showBook(bookId)
           .then(onUpdateSuccess)
           .catch(onFailure);
