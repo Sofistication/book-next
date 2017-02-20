@@ -18,12 +18,14 @@ const onCreationSuccess = function (data) {
   $('#bookList').append(newBookHtml);
 };
 
-const onUpdateSuccess = function(response) {
-  console.log(response);
-};
-
 const onFailure = function (error) {
   console.error(error);
+};
+
+const onUpdateSuccess = function(data) {
+  console.log(data);
+  let updatedBookHtml = listEntry({ book: data.book });
+  $("ul[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
 };
 
 const onSuccess = function (data) {
@@ -56,7 +58,12 @@ const onSuccess = function (data) {
     let data = getFormFields(event.target);
     let bookId = event.target.dataset.book;
     api.updateBook(data, bookId)
-      .then(onUpdateSuccess)
+      .then(function () {
+        $('.updateModal').modal('hide');
+        api.showBook(bookId)
+          .then(onUpdateSuccess)
+          .catch(onFailure);
+      })
       .catch(onFailure);
   });
 };

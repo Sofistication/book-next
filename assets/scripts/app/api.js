@@ -10,6 +10,13 @@ const indexBooks = function () {
   });
 };
 
+const showBook = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/books/' + id,
+    method: 'GET',
+  });
+};
+
 const getLists = function () {
   return $.ajax({
     url: config.apiOrigin + '/lists',
@@ -44,6 +51,7 @@ const updateBook = function (data, id) {
 
 module.exports = {
   indexBooks,
+  showBook,
   getLists,
   createBook,
   updateBook,
