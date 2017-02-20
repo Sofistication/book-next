@@ -1,9 +1,9 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateBookModal">
-  Update book.
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateBookModal-{{book.id}}">
+  Update this book.
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="updateBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="updateBookModal-{{book.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -11,7 +11,7 @@
         <h4 class="modal-title" id="myModalLabel">Book.new</h4>
       </div>
       <div class="modal-body">
-        <form id="updateBookForm" data-book="{{book.id}}">
+        <form class="updateBookForm" data-book="{{book.id}}">
           <fieldset>
             <label>
               Title
