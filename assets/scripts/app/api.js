@@ -31,8 +31,20 @@ const createBook = function (data) {
   });
 };
 
+const updateBook = function (data, id) {
+  return $.ajax({
+    url: config.apiOrigin + '/books/' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
+    },
+    data,
+  });
+};
+
 module.exports = {
   indexBooks,
   getLists,
   createBook,
+  updateBook,
 };

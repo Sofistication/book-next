@@ -18,6 +18,10 @@ const onCreationSuccess = function (data) {
   $('#bookList').append(newBookHtml);
 };
 
+const onUpdateSuccess = function(response) {
+  console.log(response);
+};
+
 const onFailure = function (error) {
   console.error(error);
 };
@@ -43,6 +47,16 @@ const onSuccess = function (data) {
     let data = getFormFields(event.target);
     api.createBook(data)
       .then(onCreationSuccess)
+      .catch(onFailure);
+  });
+
+  // add event handlers to update books
+  $('.updateBookForm').on('submit', function (event) {
+    event.preventDefault();
+    let data = getFormFields(event.target);
+    let bookId = event.target.dataset.book;
+    api.updateBook(data, bookId)
+      .then(onUpdateSuccess)
       .catch(onFailure);
   });
 };
