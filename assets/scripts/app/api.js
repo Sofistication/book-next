@@ -10,6 +10,13 @@ const indexBooks = function () {
   });
 };
 
+const showBook = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/books/' + id,
+    method: 'GET',
+  });
+};
+
 const getLists = function () {
   return $.ajax({
     url: config.apiOrigin + '/lists',
@@ -31,8 +38,21 @@ const createBook = function (data) {
   });
 };
 
+const updateBook = function (data, id) {
+  return $.ajax({
+    url: config.apiOrigin + '/books/' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
+    },
+    data,
+  });
+};
+
 module.exports = {
   indexBooks,
+  showBook,
   getLists,
   createBook,
+  updateBook,
 };

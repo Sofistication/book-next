@@ -22,6 +22,13 @@ const onFailure = function (error) {
   console.error(error);
 };
 
+const onUpdateSuccess = function(data) {
+  let updatedBookHtml = listEntry({ book: data.book });
+  setTimeout( function () {
+    $("ul[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
+  }, 1475);
+};
+
 const onSuccess = function (data) {
   // clear out any previous list that might be present
   $('#list').html('');
@@ -43,6 +50,25 @@ const onSuccess = function (data) {
     let data = getFormFields(event.target);
     api.createBook(data)
       .then(onCreationSuccess)
+      .catch(onFailure);
+  });
+
+  // add event handlers to update books
+  $('.updateBookForm').on('submit', function (event) {
+    event.preventDefault();
+    let data = getFormFields(event.target);
+    let bookId = event.target.dataset.book;
+    // $('#updateBookModal-' + bookId).modal('hide');
+    api.updateBook(data, bookId)
+      .then(function () {
+        $('#updateBookModal-' + bookId).modal('hide');
+      })
+      .then(function () {
+        // $('.updateModal').modal('hide');
+        api.showBook(bookId)
+          .then(onUpdateSuccess)
+          .catch(onFailure);
+      })
       .catch(onFailure);
   });
 };

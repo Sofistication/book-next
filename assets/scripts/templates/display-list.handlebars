@@ -1,9 +1,10 @@
-<ul class="book-list" id="bookList">
+<div class="book-list" id="bookList">
   {{#each books as |book|}}
 
     {{> list-entry book=book}}
+    {{> update-book-modal book=book}}
 
   {{/each}}
-</ul>
+</div>
 
 {{> create-book-modal}}
