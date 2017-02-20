@@ -1,6 +1,10 @@
-<li data-id="{{book.id}}"> <h4>Title: {{book.title}}</h4></li>
-{{#if book.description}}
-  <li>{{book.description}}</li>
-{{else}}
-  <li>No description.</li>
-{{/if}}
+<ul data-id="{{book.id}}">
+  <li> <h4>Title: {{book.title}}</h4></li>
+  <li>Author: {{book.author}}</li>
+  <li>Published In: {{book.published_in}}</li>
+  {{#if book.description}}
+    <li>{{book.description}}</li>
+  {{else}}
+    <li>No description.</li>
+  {{/if}}
+</ul>
