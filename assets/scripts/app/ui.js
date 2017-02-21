@@ -25,9 +25,9 @@ const onFailure = function (error) {
 
 const onUpdateSuccess = function(data) {
   let updatedBookHtml = listEntry({ book: data.book });
-  setTimeout( function () {
-    $("ul[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
-  }, 1475);
+  // setTimeout( function () {
+    $("ul[data-book='" + data.book.id +"']").replaceWith(updatedBookHtml);
+  // }, 1475);
 };
 
 const onSuccess = function (data) {
