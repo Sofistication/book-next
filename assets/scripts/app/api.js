@@ -49,10 +49,30 @@ const updateBook = function (data, id) {
   });
 };
 
+const createReading = function (book) {
+  let data = {
+    reading: {
+      book_id: book,
+      list: 'default',
+      status: 'unread'
+    }
+  };
+
+  return $.ajax({
+    url: config.apiOrigin + '/readings',
+    method: 'POST',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
+    },
+    data,
+  });
+};
+
 module.exports = {
   indexBooks,
   showBook,
   getLists,
   createBook,
   updateBook,
+  createReading
 };

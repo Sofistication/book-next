@@ -50,6 +50,16 @@ const onSuccess = function (data) {
     // inject new html into list container
     $('#list').append(bookListHtml);
 
+    // add event handlers for adding books to list
+    $('.addReading').on('click', function (event) {
+      event.preventDefault();
+      api.createReading(event.target.dataset.book)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(onFailure);
+    });
+
     // add event handler to create book
     $('#newBookForm').on('submit', function (event) {
       event.preventDefault();
