@@ -1,0 +1,11 @@
+<ul data-id="{{reading.id}}">
+  <li> <h4>Title: {{reading.book.title}}</h4></li>
+  <li>Author: {{reading.book.author}}</li>
+  <li>Published In: {{reading.book.published_in}}</li>
+  <li>Status: {{reading.status}}
+  {{#if reading.book.description}}
+    <li>{{reading.book.description}}</li>
+  {{else}}
+    <li>No description.</li>
+  {{/if}}
+</ul>
