@@ -12,3 +12,5 @@ A web app for managing your personal reading lists.
 - [ ] As a user, I would like to be able to explore books by author, title and topic, so that I can further explore topics/authors I previously enjoyed.
 - [ ] As a user, I would like to be able to rate or describe books I have read, so that I can remember what I enjoyed and what I disliked.
 - [ ] As an administrator, I would like users to add new books to the database from an external source, so I can ensure accuracy of information.
+
+## Wireframes
