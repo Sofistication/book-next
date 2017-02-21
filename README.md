@@ -14,3 +14,5 @@ A web app for managing your personal reading lists.
 - [ ] As an administrator, I would like users to add new books to the database from an external source, so I can ensure accuracy of information.
 
 ## Wireframes
+
+![Current Wireframe](IMG_20170221_102913.jpg)
