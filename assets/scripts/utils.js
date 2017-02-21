@@ -30,6 +30,7 @@ const mainDisplay = function () {
 const openingDisplay = function () {
   $('.second-bar').hide();
   $('.initial-bar').show();
+  $('#list').html('');
 };
 
 module.exports = {
