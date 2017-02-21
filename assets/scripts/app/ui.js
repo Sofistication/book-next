@@ -42,6 +42,18 @@ const onSuccess = function (data) {
     // inject new html into list container
     $('#list').append(bookListHtml);
 
+    // add event handlers for adding books to list
+    $('.removeReading').on('click', function (event) {
+      event.preventDefault();
+      let id = event.target.dataset.id;
+      api.deleteReading(id)
+        .then(function () {
+          $("ul[data-id='" + id +"']").remove();
+          $("button[data-id='" + id +"']").remove();
+          $("button[data-book='" + event.target.dataset.book +"']").remove();
+        })
+        .catch(onFailure);
+    });
   } else if (store.activeScreen === 'explore') {
     $('#list').append('<h2>Explore Books!</h2>');
 
@@ -54,9 +66,7 @@ const onSuccess = function (data) {
     $('.addReading').on('click', function (event) {
       event.preventDefault();
       api.createReading(event.target.dataset.book)
-        .then(function (response) {
-          console.log(response);
-        })
+        .then()
         .catch(onFailure);
     });
 

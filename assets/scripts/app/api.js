@@ -68,11 +68,22 @@ const createReading = function (book) {
   });
 };
 
+const deleteReading = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/readings/' + id,
+    method: 'DELETE',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
+    },
+  });
+};
+
 module.exports = {
   indexBooks,
   showBook,
   getLists,
   createBook,
   updateBook,
-  createReading
+  createReading,
+  deleteReading,
 };
