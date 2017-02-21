@@ -7,6 +7,9 @@ const indexBooks = function () {
   return $.ajax({
     url: config.apiOrigin + '/books',
     method: 'GET',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
+    },
   });
 };
 
@@ -14,6 +17,9 @@ const showBook = function (id) {
   return $.ajax({
     url: config.apiOrigin + '/books/' + id,
     method: 'GET',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
+    },
   });
 };
 
