@@ -57,6 +57,20 @@ const onSuccess = function (data) {
 
     $('.status-option').on('click', function (event) {
       event.preventDefault();
+      let id = event.target.dataset.id;
+      let stat = event.target.dataset.status;
+
+      let data = {
+        reading: {
+          status: stat,
+        }
+      };
+
+      api.updateReading(data, id)
+        .then(function (response) {
+          // TODO: add ui response here
+        })
+        .catch(onFailure);
     });
   } else if (store.activeScreen === 'explore') {
     $('#list').append('<h2>Explore Books!</h2>');
