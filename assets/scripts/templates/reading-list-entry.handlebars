@@ -3,14 +3,14 @@
   <li>Author: {{reading.book.author}}</li>
   <li>Published In: {{reading.book.published_in}}</li>
   <li>Status:
-    <div class="dropdown">
+    <div class="dropdown status-dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         {{reading.status}}
       </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#">Unread</a></li>
-        <li><a href="#">Started</a></li>
-        <li><a href="#">Read</a></li>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu{{reading.id}}">
+        <li><a class="status-option" href="#" data-status="unread" data-id="{{reading.id}}">Unread</a></li>
+        <li><a class="status-option" href="#" data-status="started" data-id="{{reading.id}}">Started</a></li>
+        <li><a class="status-option" href="#" data-status="read" data-id="{{reading.id}}">Read</a></li>
       </ul>
     </div>
   {{#if reading.book.description}}

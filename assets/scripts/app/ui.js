@@ -54,6 +54,10 @@ const onSuccess = function (data) {
         })
         .catch(onFailure);
     });
+
+    $('.status-option').on('click', function (event) {
+      event.preventDefault();
+    });
   } else if (store.activeScreen === 'explore') {
     $('#list').append('<h2>Explore Books!</h2>');
 
