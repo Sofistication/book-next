@@ -36,6 +36,9 @@ const onUpdateReadingSuccess = function(data) {
 };
 
 const exploreBooks = function (data) {
+  if (data.books.length === 0) {
+    $('#bookResults').append('<p class="searchError">No results!</p>');
+  }
 
   // construct html for list to display based on response from server
   let bookListHtml = displayList({ books: data.books, });
