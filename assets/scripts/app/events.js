@@ -5,6 +5,8 @@
 const api = require('./api');
 const ui = require('./ui');
 
+const exploreBooksLanding = require('../templates/explore-books.handlebars');
+
 const onGetList = function (event) {
   event.preventDefault();
   $('#list').empty();
@@ -15,23 +17,20 @@ const onGetList = function (event) {
 
 const onGetBooks = function (event) {
   event.preventDefault();
-  $('#list').empty();
   api.indexBooks()
     .then(ui.exploreBooks)
     .catch(ui.onFailure);
 };
 
-// const onCreateBook = function (event) {
-//   event.preventDefault();
-//   let data = getFormFields(event.target);
-//   api.createBook(data)
-//     .then(ui.onCreationSuccess)
-//     .catch(ui.onFailure);
-// };
+const onExploreBooks = function (event) {
+  event.preventDefault();
+  $('#list').empty();
+  $('#list').append(exploreBooksLanding());
+};
 
 const addHandlers = () => {
   $('#get-list').on('click', onGetList);
-  $('#explore-books').on('click', onGetBooks);
+  $('#explore-books').on('click', onExploreBooks);
 };
 
 module.exports = {
