@@ -1,6 +1,6 @@
 'use strict';
 
-// const getFormFields = require('../../../lib/get-form-fields');
+const getFormFields = require('../../../lib/get-form-fields');
 
 const api = require('./api');
 const ui = require('./ui');
@@ -17,15 +17,25 @@ const onGetList = function (event) {
 
 const onGetBooks = function (event) {
   event.preventDefault();
-  api.indexBooks()
-    .then(ui.exploreBooks)
-    .catch(ui.onFailure);
+  $('#bookResults').empty();
+  let data = getFormFields(event.target);
+  if (data.title || data.author) {
+    api.searchBooks(data)
+      .then(ui.exploreBooks)
+      .catch(ui.onFailure);
+  } else {
+    api.indexBooks()
+      .then(ui.exploreBooks)
+      .catch(ui.onFailure);
+  }
+
 };
 
 const onExploreBooks = function (event) {
   event.preventDefault();
   $('#list').empty();
   $('#list').append(exploreBooksLanding());
+  $('#bookSearch').on('submit', onGetBooks);
 };
 
 const addHandlers = () => {

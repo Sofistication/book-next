@@ -40,7 +40,7 @@ const exploreBooks = function (data) {
   // construct html for list to display based on response from server
   let bookListHtml = displayList({ books: data.books, });
   // inject new html into list container
-  $('#list').append(bookListHtml);
+  $('#bookResults').append(bookListHtml);
 
   // add event handlers for adding books to list
   $('.addReading').on('click', function (event) {
