@@ -54,6 +54,24 @@ const onSuccess = function (data) {
         })
         .catch(onFailure);
     });
+
+    $('.status-option').on('click', function (event) {
+      event.preventDefault();
+      let id = event.target.dataset.id;
+      let stat = event.target.dataset.status;
+
+      let data = {
+        reading: {
+          status: stat,
+        }
+      };
+
+      api.updateReading(data, id)
+        .then(function () {
+          $('a[data-id="status-' + id + '"]').text(stat);
+        })
+        .catch(onFailure);
+    });
   } else if (store.activeScreen === 'explore') {
     $('#list').append('<h2>Explore Books!</h2>');
 
