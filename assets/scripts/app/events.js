@@ -1,38 +1,46 @@
 'use strict';
 
-// const getFormFields = require('../../../lib/get-form-fields');
+const getFormFields = require('../../../lib/get-form-fields');
 
 const api = require('./api');
 const ui = require('./ui');
-const store = require('../store');
+
+const exploreBooksLanding = require('../templates/explore-books.handlebars');
 
 const onGetList = function (event) {
   event.preventDefault();
-  store.activeScreen = 'list';
+  $('#list').empty();
   api.getLists()
-    .then(ui.onSuccess)
+    .then(ui.readingDisplay)
     .catch(ui.onFailure);
 };
 
 const onGetBooks = function (event) {
   event.preventDefault();
-  store.activeScreen = 'explore';
-  api.indexBooks()
-    .then(ui.onSuccess)
-    .catch(ui.onFailure);
+  $('#bookResults').empty();
+  let data = getFormFields(event.target);
+  if (data.title || data.author) {
+    api.searchBooks(data)
+      .then(ui.exploreBooks)
+      .catch(ui.onFailure);
+  } else {
+    api.indexBooks()
+      .then(ui.exploreBooks)
+      .catch(ui.onFailure);
+  }
+
 };
 
-// const onCreateBook = function (event) {
-//   event.preventDefault();
-//   let data = getFormFields(event.target);
-//   api.createBook(data)
-//     .then(ui.onCreationSuccess)
-//     .catch(ui.onFailure);
-// };
+const onExploreBooks = function (event) {
+  event.preventDefault();
+  $('#list').empty();
+  $('#list').append(exploreBooksLanding());
+  $('#bookSearch').on('submit', onGetBooks);
+};
 
 const addHandlers = () => {
   $('#get-list').on('click', onGetList);
-  $('#explore-books').on('click', onGetBooks);
+  $('#explore-books').on('click', onExploreBooks);
 };
 
 module.exports = {

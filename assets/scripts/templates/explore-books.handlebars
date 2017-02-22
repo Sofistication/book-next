@@ -1,0 +1,19 @@
+<h2>Explore Books!</h2>
+<p>Enter search terms below, or leave empty to get ALL OF THE BOOKS!</p>
+<form id="bookSearch">
+  <fieldset>
+    <label>
+      Title
+      <input type="text" name="title" placeholder="Title">
+    </label>
+    <label>
+      Author
+      <input type="text" name="author" placeholder="Author">
+    </label>
+    <button type="submit" class="btn btn-primary">Get Books!</button>
+  </fieldset>
+</form>
+
+{{> create-book-modal}}
+
+<div id="bookResults"></div>
