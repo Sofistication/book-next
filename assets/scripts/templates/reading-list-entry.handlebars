@@ -2,7 +2,17 @@
   <li> <h4>Title: {{reading.book.title}}</h4></li>
   <li>Author: {{reading.book.author}}</li>
   <li>Published In: {{reading.book.published_in}}</li>
-  <li>Status: {{reading.status}}
+  <li>Status:
+    <div class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{reading.status}}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">Unread</a></li>
+        <li><a href="#">Started</a></li>
+        <li><a href="#">Read</a></li>
+      </ul>
+    </div>
   {{#if reading.book.description}}
     <li>{{reading.book.description}}</li>
   {{else}}
