@@ -32,7 +32,7 @@ const onUpdateSuccess = function(data) {
 const onUpdateReadingSuccess = function(data) {
   console.log(data);
   let updatedBookHtml = readingListEntry({ reading: data.reading });
-  $("ul[data-id='" + data.reading.book.id +"']").replaceWith(updatedBookHtml);
+  $("ul[data-id='" + data.reading.id +"']").replaceWith(updatedBookHtml);
 };
 
 const onSuccess = function (data) {
