@@ -30,6 +30,7 @@ const onUpdateSuccess = function(data) {
 };
 
 const onUpdateReadingSuccess = function(data) {
+  console.log(data);
   let updatedBookHtml = readingListEntry({ reading: data.reading });
   $("ul[data-id='" + data.reading.book.id +"']").replaceWith(updatedBookHtml);
 };
@@ -82,14 +83,13 @@ const onSuccess = function (data) {
       event.preventDefault();
       let data = getFormFields(event.target);
       let bookId = event.target.dataset.book;
-      // $('#updateBookModal-' + bookId).modal('hide');
+      let id = event.target.dataset.id;
       api.updateBook(data, bookId)
         .then(function () {
           $('#updateBookModal-' + bookId).modal('hide');
         })
         .then(function () {
-          // $('.updateModal').modal('hide');
-          api.showBook(bookId)
+          api.showReading(id)
             .then(onUpdateReadingSuccess)
             .catch(onFailure);
         })

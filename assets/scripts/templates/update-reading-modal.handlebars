@@ -1,0 +1,41 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateBookModal-{{reading.book.id}}" data-book="{{book.id}}">
+  Update {{book.title}}.
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="updateBookModal-{{reading.book.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Book.new</h4>
+      </div>
+      <div class="modal-body">
+        <form class="updateBookForm"  data-id="{{reading.id}}" data-book="{{reading.book.id}}">
+          <fieldset>
+            <label>
+              Title
+              <input type="text" name="book[title]" value="{{reading.book.title}}">
+            </label>
+            <label>
+              Author
+              <input type="text" name="book[author]" value="{{reading.book.author}}">
+            </label>
+            <label>
+              Year Published
+              <input type="text" name="book[published_in]" value="{{reading.book.published_in}}">
+            </label>
+            <label>
+              Description (optional)
+              <input type="text" name="book[description]" value="{{reading.book.description}}">
+            </label>
+            <button type="submit" class="btn btn-primary">Update book!</button>
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

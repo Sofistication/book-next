@@ -55,6 +55,16 @@ const updateBook = function (data, id) {
   });
 };
 
+const showReading = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/readings/' + id,
+    method: 'GET',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
+    },
+  });
+};
+
 const createReading = function (book) {
   let data = {
     reading: {
@@ -101,6 +111,7 @@ module.exports = {
   getLists,
   createBook,
   updateBook,
+  showReading,
   createReading,
   updateReading,
   deleteReading,
