@@ -2,6 +2,8 @@
   {{#each books as |book|}}
 
     {{> list-entry book=book}}
+    {{> update-book-modal book=book}}
+    {{> add-reading book=book}}
 
   {{/each}}
 </div>

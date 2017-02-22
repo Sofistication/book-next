@@ -26,16 +26,12 @@ const onFailure = function (error) {
 
 const onUpdateSuccess = function(data) {
   let updatedBookHtml = listEntry({ book: data.book });
-  $("button[data-id='" + data.book.id +"']").remove();
-  $("button[data-book='" + data.book.id +"']").remove();
   $("ul[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
 };
 
 const onUpdateReadingSuccess = function(data) {
-  let updatedBookHtml = readingListEntry({ book: data.book });
-  $("button[data-id='" + data.book.id +"']").remove();
-  $("button[data-book='" + data.book.id +"']").remove();
-  $("ul[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
+  let updatedBookHtml = readingListEntry({ reading: data.reading });
+  $("ul[data-id='" + data.reading.book.id +"']").replaceWith(updatedBookHtml);
 };
 
 const onSuccess = function (data) {

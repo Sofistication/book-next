@@ -2,6 +2,8 @@
   {{#each readings as |reading|}}
 
     {{> reading-list-entry reading=reading}}
+    {{> update-book-modal book=reading.book}}
+    {{> remove-reading reading=reading}}
 
   {{/each}}
 </div>
