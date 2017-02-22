@@ -35,114 +35,109 @@ const onUpdateReadingSuccess = function(data) {
   $("ul[data-id='" + data.reading.id +"']").replaceWith(updatedBookHtml);
 };
 
-const onSuccess = function (data) {
-  // clear out any previous list that might be present
-  $('#list').html('');
-  // set appropriate page title
-  if (store.activeScreen === 'list') {
-    $('#list').append('<h2>Your Reading List</h2>');
+const exploreBooks = function (data) {
 
-    // construct html for list to display based on response from server
-    let bookListHtml = readingList({ readings: data.readings, });
-    // inject new html into list container
-    $('#list').append(bookListHtml);
+  // construct html for list to display based on response from server
+  let bookListHtml = displayList({ books: data.books, });
+  // inject new html into list container
+  $('#list').append(bookListHtml);
 
-    // add event handlers for adding books to list
-    $('.removeReading').on('click', function (event) {
-      event.preventDefault();
-      let id = event.target.dataset.id;
-      api.deleteReading(id)
-        .then(function () {
-          $("ul[data-id='" + id +"']").remove();
-          $("button[data-id='" + id +"']").remove();
-          $("button[data-book='" + event.target.dataset.book +"']").remove();
-        })
-        .catch(onFailure);
-    });
+  // add event handlers for adding books to list
+  $('.addReading').on('click', function (event) {
+    event.preventDefault();
+    api.createReading(event.target.dataset.book)
+      .then()
+      .catch(onFailure);
+  });
 
-    $('.status-option').on('click', function (event) {
-      event.preventDefault();
-      let id = event.target.dataset.id;
-      let stat = event.target.dataset.status;
+  // add event handler to create book
+  $('#newBookForm').on('submit', function (event) {
+    event.preventDefault();
+    let data = getFormFields(event.target);
+    api.createBook(data)
+      .then(onCreationSuccess)
+      .catch(onFailure);
+  });
 
-      let data = {
-        reading: {
-          status: stat,
-        }
-      };
+  // add event handlers to update books
+  $('.updateBookForm').on('submit', function (event) {
+    event.preventDefault();
+    let data = getFormFields(event.target);
+    let bookId = event.target.dataset.book;
+    // $('#updateBookModal-' + bookId).modal('hide');
+    api.updateBook(data, bookId)
+      .then(function () {
+        $('#updateBookModal-' + bookId).modal('hide');
+      })
+      .then(function () {
+        // $('.updateModal').modal('hide');
+        api.showBook(bookId)
+          .then(onUpdateSuccess)
+          .catch(onFailure);
+      })
+      .catch(onFailure);
+  });
+};
 
-      api.updateReading(data, id)
-        .then(function () {
-          $('a[data-id="status-' + id + '"]').text(stat);
-        })
-        .catch(onFailure);
-    });
+const readingDisplay = function (data) {
+  // construct html for list to display based on response from server
+  let bookListHtml = readingList({ readings: data.readings, });
+  // inject new html into list container
+  $('#list').append(bookListHtml);
 
-    // add event handlers to update books
-    $('.updateBookForm').on('submit', function (event) {
-      event.preventDefault();
-      let data = getFormFields(event.target);
-      let bookId = event.target.dataset.book;
-      let id = event.target.dataset.id;
-      api.updateBook(data, bookId)
-        .then(function () {
-          $('#updateBookModal-' + bookId).modal('hide');
-        })
-        .then(function () {
-          api.showReading(id)
-            .then(onUpdateReadingSuccess)
-            .catch(onFailure);
-        })
-        .catch(onFailure);
-    });
-  } else if (store.activeScreen === 'explore') {
-    $('#list').append('<h2>Explore Books!</h2>');
+  // add event handlers for adding books to list
+  $('.removeReading').on('click', function (event) {
+    event.preventDefault();
+    let id = event.target.dataset.id;
+    api.deleteReading(id)
+      .then(function () {
+        $("ul[data-id='" + id +"']").remove();
+        $("button[data-id='" + id +"']").remove();
+        $("button[data-book='" + event.target.dataset.book +"']").remove();
+      })
+      .catch(onFailure);
+  });
 
-    // construct html for list to display based on response from server
-    let bookListHtml = displayList({ books: data.books, });
-    // inject new html into list container
-    $('#list').append(bookListHtml);
+  $('.status-option').on('click', function (event) {
+    event.preventDefault();
+    let id = event.target.dataset.id;
+    let stat = event.target.dataset.status;
 
-    // add event handlers for adding books to list
-    $('.addReading').on('click', function (event) {
-      event.preventDefault();
-      api.createReading(event.target.dataset.book)
-        .then()
-        .catch(onFailure);
-    });
+    let data = {
+      reading: {
+        status: stat,
+      }
+    };
 
-    // add event handler to create book
-    $('#newBookForm').on('submit', function (event) {
-      event.preventDefault();
-      let data = getFormFields(event.target);
-      api.createBook(data)
-        .then(onCreationSuccess)
-        .catch(onFailure);
-    });
+    api.updateReading(data, id)
+      .then(function () {
+        $('a[data-id="status-' + id + '"]').text(stat);
+      })
+      .catch(onFailure);
+  });
 
-    // add event handlers to update books
-    $('.updateBookForm').on('submit', function (event) {
-      event.preventDefault();
-      let data = getFormFields(event.target);
-      let bookId = event.target.dataset.book;
-      // $('#updateBookModal-' + bookId).modal('hide');
-      api.updateBook(data, bookId)
-        .then(function () {
-          $('#updateBookModal-' + bookId).modal('hide');
-        })
-        .then(function () {
-          // $('.updateModal').modal('hide');
-          api.showBook(bookId)
-            .then(onUpdateSuccess)
-            .catch(onFailure);
-        })
-        .catch(onFailure);
-    });
-  }
+  // add event handlers to update books
+  $('.updateBookForm').on('submit', function (event) {
+    event.preventDefault();
+    let data = getFormFields(event.target);
+    let bookId = event.target.dataset.book;
+    let id = event.target.dataset.id;
+    api.updateBook(data, bookId)
+      .then(function () {
+        $('#updateBookModal-' + bookId).modal('hide');
+      })
+      .then(function () {
+        api.showReading(id)
+          .then(onUpdateReadingSuccess)
+          .catch(onFailure);
+      })
+      .catch(onFailure);
+  });
 };
 
 module.exports = {
-  onSuccess,
+  exploreBooks,
+  readingDisplay,
   onCreationSuccess,
   onFailure,
 };

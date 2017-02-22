@@ -4,21 +4,20 @@
 
 const api = require('./api');
 const ui = require('./ui');
-const store = require('../store');
 
 const onGetList = function (event) {
   event.preventDefault();
-  store.activeScreen = 'list';
+  $('#list').empty();
   api.getLists()
-    .then(ui.onSuccess)
+    .then(ui.readingDisplay)
     .catch(ui.onFailure);
 };
 
 const onGetBooks = function (event) {
   event.preventDefault();
-  store.activeScreen = 'explore';
+  $('#list').empty();
   api.indexBooks()
-    .then(ui.onSuccess)
+    .then(ui.exploreBooks)
     .catch(ui.onFailure);
 };
 
