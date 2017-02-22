@@ -67,8 +67,8 @@ const onSuccess = function (data) {
       };
 
       api.updateReading(data, id)
-        .then(function (response) {
-          // TODO: add ui response here
+        .then(function () {
+          $('a[data-id="status-' + id + '"]').text(stat);
         })
         .catch(onFailure);
     });
