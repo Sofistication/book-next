@@ -9,6 +9,24 @@ const indexBooks = function () {
     method: 'GET',
     headers: {
       Authorization: `Token token=${store.user.token}`,
+    }
+  });
+};
+
+const searchBooks = function (data) {
+  let endpoint = '/books?';
+  if (!data.title) {
+    endpoint += 'author=' + data.author;
+  } else if (!data.author) {
+    endpoint += 'title=' + data.title;
+  } else {
+    endpoint += 'title=' + data.title + '&author=' + data.author;
+  }
+  return $.ajax({
+    url: config.apiOrigin + endpoint,
+    method: 'GET',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
     },
   });
 };
@@ -107,6 +125,7 @@ const deleteReading = function (id) {
 
 module.exports = {
   indexBooks,
+  searchBooks,
   showBook,
   getLists,
   createBook,
