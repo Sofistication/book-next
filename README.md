@@ -23,6 +23,8 @@ Interacts with an API at [this gitHub repository](https://github.com/Sofisticati
 
 In designing this app, I began by creating the most basic version of the API, and then began to code the client. As the needs of the client surpassed the capabilities of the API, I went back and added in the necessary functionality.
 
+In order to better prioritize development, I have been opening a number of issues on my repositories with tasks that need to be completed or bugs that need to be fixed, and using pull requests instead of command line merges in order to track when each issue is solved.
+
 ## Technologies
 
 The majority of the client-side app is written using JavaScript, and relying heavily on [jQuery](http://jquery.com/) and [handlebars](http://handlebarsjs.com/) to render json being returned by the api. A particularly useful technology has been the recent implementation of promises into jQuery, which allowed for relatively painless handling of asynchronicity.
