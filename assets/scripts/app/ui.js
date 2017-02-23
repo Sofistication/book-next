@@ -62,24 +62,24 @@ const exploreBooks = function (data) {
       .catch(onFailure);
   });
 
-  // add event handlers to update books
-  $('.updateBookForm').on('submit', function (event) {
-    event.preventDefault();
-    let data = getFormFields(event.target);
-    let bookId = event.target.dataset.book;
-    // $('#updateBookModal-' + bookId).modal('hide');
-    api.updateBook(data, bookId)
-      .then(function () {
-        $('#updateBookModal-' + bookId).modal('hide');
-      })
-      .then(function () {
-        // $('.updateModal').modal('hide');
-        api.showBook(bookId)
-          .then(onUpdateSuccess)
-          .catch(onFailure);
-      })
-      .catch(onFailure);
-  });
+  // // add event handlers to update books
+  // $('.updateBookForm').on('submit', function (event) {
+  //   event.preventDefault();
+  //   let data = getFormFields(event.target);
+  //   let bookId = event.target.dataset.book;
+  //   // $('#updateBookModal-' + bookId).modal('hide');
+  //   api.updateBook(data, bookId)
+  //     .then(function () {
+  //       $('#updateBookModal-' + bookId).modal('hide');
+  //     })
+  //     .then(function () {
+  //       // $('.updateModal').modal('hide');
+  //       api.showBook(bookId)
+  //         .then(onUpdateSuccess)
+  //         .catch(onFailure);
+  //     })
+  //     .catch(onFailure);
+  // });
 };
 
 const readingDisplay = function (data) {
@@ -119,23 +119,23 @@ const readingDisplay = function (data) {
       .catch(onFailure);
   });
 
-  // add event handlers to update books
-  $('.updateBookForm').on('submit', function (event) {
-    event.preventDefault();
-    let data = getFormFields(event.target);
-    let bookId = event.target.dataset.book;
-    let id = event.target.dataset.id;
-    api.updateBook(data, bookId)
-      .then(function () {
-        $('#updateBookModal-' + bookId).modal('hide');
-      })
-      .then(function () {
-        api.showReading(id)
-          .then(onUpdateReadingSuccess)
-          .catch(onFailure);
-      })
-      .catch(onFailure);
-  });
+  // // add event handlers to update books
+  // $('.updateBookForm').on('submit', function (event) {
+  //   event.preventDefault();
+  //   let data = getFormFields(event.target);
+  //   let bookId = event.target.dataset.book;
+  //   let id = event.target.dataset.id;
+  //   api.updateBook(data, bookId)
+  //     .then(function () {
+  //       $('#updateBookModal-' + bookId).modal('hide');
+  //     })
+  //     .then(function () {
+  //       api.showReading(id)
+  //         .then(onUpdateReadingSuccess)
+  //         .catch(onFailure);
+  //     })
+  //     .catch(onFailure);
+  // });
 };
 
 module.exports = {
