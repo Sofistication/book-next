@@ -70,3 +70,7 @@ def index
 end
 ```
 Also visible here is an implementation of a consistent order of return for books: they will always be returned alphabetically by author.
+
+## Tests
+
+There are a number of rspec tests written for the API repository. Due to changes to resource ownership and databse structure, these tests may not be passing any more, as they were written based on an earlier version of the API in which users owned books directly. However, these tests did work when they were written, and [are scheduled to be fixed](https://github.com/Sofistication/reading-list-api/issues/19) though time constraints for project presentation have prevented this before now.
