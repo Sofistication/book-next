@@ -11,6 +11,10 @@ const listEntry = require('../templates/list-entry.handlebars');
 const readingListEntry = require('../templates/reading-list-entry.handlebars');
 const addReading = require('../templates/add-reading.handlebars');
 
+const onFailure = function (error) {
+  console.error(error);
+};
+
 const onCreationSuccess = function (data) {
   // hide modal and clear input
   $('#newBookModal').modal('hide');
@@ -28,10 +32,6 @@ const onCreationSuccess = function (data) {
       .then()
       .catch(onFailure);
   });
-};
-
-const onFailure = function (error) {
-  console.error(error);
 };
 
 // const onUpdateSuccess = function(data) {
@@ -59,8 +59,16 @@ const exploreBooks = function (data) {
   $('.addReading').on('click', function (event) {
     event.preventDefault();
     api.createReading(event.target.dataset.book)
-      .then()
-      .catch(onFailure);
+      .then(function () {
+        $(event.target).text('Book added!');
+        $(event.target).off('click');
+      })
+      .catch(function () {
+        $(event.target).removeClass('btn-primary');
+        $(event.target).addClass('btn-warning');
+        $(event.target).text('This book is already on your list!');
+        $(event.target).off('click');
+      });
   });
 
   // // add event handlers to update books
