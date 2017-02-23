@@ -9,31 +9,41 @@ const displayList = require('../templates/display-list.handlebars');
 const readingList = require('../templates/display-reading-list.handlebars');
 const listEntry = require('../templates/list-entry.handlebars');
 const readingListEntry = require('../templates/reading-list-entry.handlebars');
+const addReading = require('../templates/add-reading.handlebars');
 
 const onCreationSuccess = function (data) {
   // hide modal and clear input
   $('#newBookModal').modal('hide');
   utils.clearModalInput('#newBookForm');
+  $('#bookResults').append('<p class="createSuccess">Book Added!</p>');
   // create new entry on list from successfully created book
-  let newBookHtml = listEntry({ book: data.book });
+  let newBookHtml = listEntry({ book: data.book }) + addReading({ book:data.book });
   // add new entry to list
   $('#bookList').append(newBookHtml);
+
+  // add event handlers for adding books to list
+  $('#add' + data.book.id).on('click', function (event) {
+    event.preventDefault();
+    api.createReading(event.target.dataset.book)
+      .then()
+      .catch(onFailure);
+  });
 };
 
 const onFailure = function (error) {
   console.error(error);
 };
 
-const onUpdateSuccess = function(data) {
-  let updatedBookHtml = listEntry({ book: data.book });
-  $("ul[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
-};
-
-const onUpdateReadingSuccess = function(data) {
-  console.log(data);
-  let updatedBookHtml = readingListEntry({ reading: data.reading });
-  $("ul[data-id='" + data.reading.id +"']").replaceWith(updatedBookHtml);
-};
+// const onUpdateSuccess = function(data) {
+//   let updatedBookHtml = listEntry({ book: data.book });
+//   $("div[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
+// };
+//
+// const onUpdateReadingSuccess = function(data) {
+//   console.log(data);
+//   let updatedBookHtml = readingListEntry({ reading: data.reading });
+//   $("div[data-id='" + data.reading.id +"']").replaceWith(updatedBookHtml);
+// };
 
 const exploreBooks = function (data) {
   if (data.books.length === 0) {
@@ -53,33 +63,24 @@ const exploreBooks = function (data) {
       .catch(onFailure);
   });
 
-  // add event handler to create book
-  $('#newBookForm').on('submit', function (event) {
-    event.preventDefault();
-    let data = getFormFields(event.target);
-    api.createBook(data)
-      .then(onCreationSuccess)
-      .catch(onFailure);
-  });
-
-  // add event handlers to update books
-  $('.updateBookForm').on('submit', function (event) {
-    event.preventDefault();
-    let data = getFormFields(event.target);
-    let bookId = event.target.dataset.book;
-    // $('#updateBookModal-' + bookId).modal('hide');
-    api.updateBook(data, bookId)
-      .then(function () {
-        $('#updateBookModal-' + bookId).modal('hide');
-      })
-      .then(function () {
-        // $('.updateModal').modal('hide');
-        api.showBook(bookId)
-          .then(onUpdateSuccess)
-          .catch(onFailure);
-      })
-      .catch(onFailure);
-  });
+  // // add event handlers to update books
+  // $('.updateBookForm').on('submit', function (event) {
+  //   event.preventDefault();
+  //   let data = getFormFields(event.target);
+  //   let bookId = event.target.dataset.book;
+  //   // $('#updateBookModal-' + bookId).modal('hide');
+  //   api.updateBook(data, bookId)
+  //     .then(function () {
+  //       $('#updateBookModal-' + bookId).modal('hide');
+  //     })
+  //     .then(function () {
+  //       // $('.updateModal').modal('hide');
+  //       api.showBook(bookId)
+  //         .then(onUpdateSuccess)
+  //         .catch(onFailure);
+  //     })
+  //     .catch(onFailure);
+  // });
 };
 
 const readingDisplay = function (data) {
@@ -94,7 +95,7 @@ const readingDisplay = function (data) {
     let id = event.target.dataset.id;
     api.deleteReading(id)
       .then(function () {
-        $("ul[data-id='" + id +"']").remove();
+        $("div[data-id='" + id +"']").remove();
         $("button[data-id='" + id +"']").remove();
         $("button[data-book='" + event.target.dataset.book +"']").remove();
       })
@@ -119,23 +120,23 @@ const readingDisplay = function (data) {
       .catch(onFailure);
   });
 
-  // add event handlers to update books
-  $('.updateBookForm').on('submit', function (event) {
-    event.preventDefault();
-    let data = getFormFields(event.target);
-    let bookId = event.target.dataset.book;
-    let id = event.target.dataset.id;
-    api.updateBook(data, bookId)
-      .then(function () {
-        $('#updateBookModal-' + bookId).modal('hide');
-      })
-      .then(function () {
-        api.showReading(id)
-          .then(onUpdateReadingSuccess)
-          .catch(onFailure);
-      })
-      .catch(onFailure);
-  });
+  // // add event handlers to update books
+  // $('.updateBookForm').on('submit', function (event) {
+  //   event.preventDefault();
+  //   let data = getFormFields(event.target);
+  //   let bookId = event.target.dataset.book;
+  //   let id = event.target.dataset.id;
+  //   api.updateBook(data, bookId)
+  //     .then(function () {
+  //       $('#updateBookModal-' + bookId).modal('hide');
+  //     })
+  //     .then(function () {
+  //       api.showReading(id)
+  //         .then(onUpdateReadingSuccess)
+  //         .catch(onFailure);
+  //     })
+  //     .catch(onFailure);
+  // });
 };
 
 module.exports = {

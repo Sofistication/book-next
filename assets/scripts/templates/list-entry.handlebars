@@ -1,10 +1,9 @@
-<ul data-id="{{book.id}}">
-  <li> <h4>Title: {{book.title}}</h4></li>
-  <li>Author: {{book.author}}</li>
-  <li>Published In: {{book.published_in}}</li>
-  {{#if book.description}}
-    <li>{{book.description}}</li>
+<div data-id="{{book.id}}">
+  <h4>{{book.title}} by {{book.author}}</h4>
+  <p class="list-data">Published In: {{book.published_in}}</p>
+  <p class="list-data">{{#if book.description}}
+    {{book.description}}
   {{else}}
-    <li>No description.</li>
-  {{/if}}
-</ul>
+    No description.
+  {{/if}}</p>
+</div>

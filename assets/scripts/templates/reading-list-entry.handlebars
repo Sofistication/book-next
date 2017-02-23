@@ -1,21 +1,19 @@
-<ul data-id="{{reading.id}}" data-book="{{reading.book.id}}">
-  <li> <h4>Title: {{reading.book.title}}</h4></li>
-  <li>Author: {{reading.book.author}}</li>
-  <li>Published In: {{reading.book.published_in}}</li>
-  <li>Status:
-    <div class="dropdown status-dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-id="status-{{reading.id}}">
-        {{reading.status}}
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu{{reading.id}}">
-        <li><a class="status-option" href="#" data-status="unread" data-id="{{reading.id}}">Unread</a></li>
-        <li><a class="status-option" href="#" data-status="started" data-id="{{reading.id}}">Started</a></li>
-        <li><a class="status-option" href="#" data-status="read" data-id="{{reading.id}}">Read</a></li>
-      </ul>
-    </div>
-  {{#if reading.book.description}}
-    <li>{{reading.book.description}}</li>
+<div data-id="{{reading.id}}" data-book="{{reading.book.id}}">
+  <h4>{{reading.book.title}} by {{reading.book.author}}</h4>
+  <p class="list-data">Published In: {{reading.book.published_in}}</p>
+  <p class="list-data">Status: <div class="dropdown status-dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-id="status-{{reading.id}}">
+      {{reading.status}}
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu{{reading.id}}">
+      <li><a class="status-option" href="#" data-status="unread" data-id="{{reading.id}}">Unread</a></li>
+      <li><a class="status-option" href="#" data-status="started" data-id="{{reading.id}}">Started</a></li>
+      <li><a class="status-option" href="#" data-status="read" data-id="{{reading.id}}">Read</a></li>
+    </ul>
+  </div></p>
+  <p class="list-data">{{#if reading.book.description}}
+    {{reading.book.description}}
   {{else}}
-    <li>No description.</li>
-  {{/if}}
-</ul>
+    No description.
+  {{/if}}</p>
+</div>
