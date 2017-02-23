@@ -9,15 +9,25 @@ const displayList = require('../templates/display-list.handlebars');
 const readingList = require('../templates/display-reading-list.handlebars');
 const listEntry = require('../templates/list-entry.handlebars');
 const readingListEntry = require('../templates/reading-list-entry.handlebars');
+const addReading = require('../templates/add-reading.handlebars');
 
 const onCreationSuccess = function (data) {
   // hide modal and clear input
   $('#newBookModal').modal('hide');
   utils.clearModalInput('#newBookForm');
+  $('#bookResults').append('<p class="createSuccess">Book Added!</p>');
   // create new entry on list from successfully created book
-  let newBookHtml = listEntry({ book: data.book });
+  let newBookHtml = listEntry({ book: data.book }) + addReading({ book:data.book });
   // add new entry to list
   $('#bookList').append(newBookHtml);
+
+  // add event handlers for adding books to list
+  $('#add' + data.book.id).on('click', function (event) {
+    event.preventDefault();
+    api.createReading(event.target.dataset.book)
+      .then()
+      .catch(onFailure);
+  });
 };
 
 const onFailure = function (error) {
@@ -50,15 +60,6 @@ const exploreBooks = function (data) {
     event.preventDefault();
     api.createReading(event.target.dataset.book)
       .then()
-      .catch(onFailure);
-  });
-
-  // add event handler to create book
-  $('#newBookForm').on('submit', function (event) {
-    event.preventDefault();
-    let data = getFormFields(event.target);
-    api.createBook(data)
-      .then(onCreationSuccess)
       .catch(onFailure);
   });
 

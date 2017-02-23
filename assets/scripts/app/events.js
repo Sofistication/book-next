@@ -36,6 +36,14 @@ const onExploreBooks = function (event) {
   $('#list').empty();
   $('#list').append(exploreBooksLanding());
   $('#bookSearch').on('submit', onGetBooks);
+  // add event handler to create book
+  $('#newBookForm').on('submit', function (event) {
+    event.preventDefault();
+    let data = getFormFields(event.target);
+    api.createBook(data)
+      .then(ui.onCreationSuccess)
+      .catch(ui.onFailure);
+  });
 };
 
 const addHandlers = () => {
