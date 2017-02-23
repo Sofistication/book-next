@@ -22,3 +22,51 @@ Interacts with an API at [this gitHub repository](https://github.com/Sofisticati
 ## Design Approach
 
 In designing this app, I began by creating the most basic version of the API, and then began to code the client. As the needs of the client surpassed the capabilities of the API, I went back and added in the necessary functionality.
+
+## Technologies
+
+The majority of the client-side app is written using JavaScript, and relying heavily on [jQuery](http://jquery.com/) and [handlebars](http://handlebarsjs.com/) to render json being returned by the api. A particularly useful technology has been the recent implementation of promises into jQuery, which allowed for relatively painless handling of asynchronicity.
+
+The server is a Rails API whose documentation is linked above. Authenticated users are able to view a list of books, or search the list by title, author or a combination of the two. Users can add books if they do not exist, and once they have found the book they can add them to their reading list. When viewing their list, users can mark books with a status of unread, started, or read.
+
+## Bragging section
+
+There are a couple of pieces of code which do things not explicitly covered in the lessons on rails which I wish to highlight.
+
+The first is in the `create` action of the `ReadingsController`. THis piece of code checks if the user has already added the book in question to their list, which in terms of the database structure means whether an entry in the reading table with the user_id and book_id already exists:
+```ruby
+# POST /readings
+def create
+  @reading = current_user.readings.build(reading_params)
+
+  if Reading.exists?(user_id: current_user.id,
+                     book_id: reading_params[:book_id])
+    head :conflict
+  elsif @reading.save
+    render json: @reading, status: :created
+  else
+    render json: @reading.errors, status: :unprocessable_entity
+  end
+end
+```
+The second such piece of code is the implementation of searching by title and author. First, a private method for searchable parameters is defined:
+```ruby
+def search_params
+  params.permit(:title, :author)
+end
+private :search_params
+```
+whose presence is then checked by the index controller when it is called:
+```ruby
+# GET /books
+def index
+  @books = if search_params
+             Book.where(search_params).order(author: :asc)
+           else
+             Book.all.order(author: :asc)
+           end
+
+  render json: @books
+end
+```
+Also visible here is an implementation of a consistent order of return for books: they will always be returned alphabetically by author.
