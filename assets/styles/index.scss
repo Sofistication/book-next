@@ -10,6 +10,7 @@ body {
 header {
   background-color: $primary-color-light;
   color: $primary-text-color;
+  margin: 0;
   text-align: center;
 }
 
@@ -25,5 +26,5 @@ main {
 .list-container {
   background-color: $accent-color;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 800px;
 }

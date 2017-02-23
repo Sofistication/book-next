@@ -1,8 +1,7 @@
-<ul data-id="{{reading.id}}" data-book="{{reading.book.id}}">
-  <li> <h4>Title: {{reading.book.title}}</h4></li>
-  <li>Author: {{reading.book.author}}</li>
-  <li>Published In: {{reading.book.published_in}}</li>
-  <li>Status:
+<div data-id="{{reading.id}}" data-book="{{reading.book.id}}">
+  <h4>{{reading.book.title}} by {{reading.book.author}}</h4>
+  Published In: {{reading.book.published_in}}
+  Status:
     <div class="dropdown status-dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-id="status-{{reading.id}}">
         {{reading.status}}
@@ -14,8 +13,8 @@
       </ul>
     </div>
   {{#if reading.book.description}}
-    <li>{{reading.book.description}}</li>
+    {{reading.book.description}}
   {{else}}
-    <li>No description.</li>
+    No description.
   {{/if}}
-</ul>
+</div>

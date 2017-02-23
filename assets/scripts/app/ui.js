@@ -24,16 +24,16 @@ const onFailure = function (error) {
   console.error(error);
 };
 
-const onUpdateSuccess = function(data) {
-  let updatedBookHtml = listEntry({ book: data.book });
-  $("ul[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
-};
-
-const onUpdateReadingSuccess = function(data) {
-  console.log(data);
-  let updatedBookHtml = readingListEntry({ reading: data.reading });
-  $("ul[data-id='" + data.reading.id +"']").replaceWith(updatedBookHtml);
-};
+// const onUpdateSuccess = function(data) {
+//   let updatedBookHtml = listEntry({ book: data.book });
+//   $("div[data-id='" + data.book.id +"']").replaceWith(updatedBookHtml);
+// };
+//
+// const onUpdateReadingSuccess = function(data) {
+//   console.log(data);
+//   let updatedBookHtml = readingListEntry({ reading: data.reading });
+//   $("div[data-id='" + data.reading.id +"']").replaceWith(updatedBookHtml);
+// };
 
 const exploreBooks = function (data) {
   if (data.books.length === 0) {
@@ -94,7 +94,7 @@ const readingDisplay = function (data) {
     let id = event.target.dataset.id;
     api.deleteReading(id)
       .then(function () {
-        $("ul[data-id='" + id +"']").remove();
+        $("div[data-id='" + id +"']").remove();
         $("button[data-id='" + id +"']").remove();
         $("button[data-book='" + event.target.dataset.book +"']").remove();
       })
