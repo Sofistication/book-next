@@ -7,6 +7,13 @@ const getFormFields = require(`../../../lib/get-form-fields`);
 const api = require('./api');
 const ui = require('./ui');
 const store = require('../store');
+const utils = require('../utils');
+
+const clearModals = function (event) {
+  let selector = '#' + event.target.id + '> div > div > .modal-body > form';
+  utils.clearModalInput(selector);
+  utils.clearErrorMessage(selector);
+};
 
 const onSignUp = function (event) {
   event.preventDefault();
@@ -55,7 +62,8 @@ const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
   $('#change-password').on('submit', onChangePass);
-  $('#sign-out').on('submit', onSignOut);
+  $('#sign-out').on('click', onSignOut);
+  $('.modal').on('hidden.bs.modal', clearModals);
 };
 
 module.exports = {
