@@ -62,7 +62,7 @@ const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
   $('#change-password').on('submit', onChangePass);
-  $('#sign-out').on('submit', onSignOut);
+  $('#sign-out').on('click', onSignOut);
   $('.modal').on('hidden.bs.modal', clearModals);
 };
 

@@ -16,9 +16,6 @@ const signUpSuccess = () => {
 };
 
 const signOutSuccess = () => {
-  $('#signOutModal').modal('hide');
-  utils.clearErrorMessage('#sign-out');
-  utils.clearModalInput('#sign-out');
   utils.openingDisplay();
 };
 
