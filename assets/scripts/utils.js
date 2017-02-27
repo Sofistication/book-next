@@ -21,6 +21,10 @@ const addErrorMessage = function (element, status) {
   $(element).append(html);
 };
 
+const clearErrorMessage = function (element) {
+  $(element + '> .modal-error').remove();
+};
+
 const mainDisplay = function () {
   $('.second-bar').removeClass('hidden');
   $('.second-bar').show();
@@ -37,6 +41,7 @@ module.exports = {
   clearInput,
   clearModalInput,
   addErrorMessage,
+  clearErrorMessage,
   mainDisplay,
   openingDisplay
 };
