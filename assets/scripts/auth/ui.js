@@ -37,10 +37,10 @@ const signUpFailure = (error) => {
   // console.error(error.status);
 };
 
+// even on failure, sign out should take you to theinitial screen
 const signOutFailure = (error) => {
-  utils.clearErrorMessage('#sign-out');
-  utils.addErrorMessage('#sign-out', error.status);
-  // console.error(error.status);
+  console.error(error.status);
+  utils.openingDisplay();
 };
 
 const changePassFailure = (error) => {
