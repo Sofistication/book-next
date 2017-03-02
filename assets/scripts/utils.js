@@ -12,7 +12,7 @@ const addErrorMessage = function (element, status) {
   let html = '<p class="modal-error">';
   switch (status) {
     case 401:
-      html += 'Wrong Password!';
+      html += 'Wrong Username or Password!';
       break;
     default:
       html += 'Unexpected Error!';
