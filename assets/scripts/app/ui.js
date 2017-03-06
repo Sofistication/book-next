@@ -15,6 +15,12 @@ const onFailure = function (error) {
   console.error(error);
 };
 
+const onCreationFailure = function (error) {
+   utils.addErrorMessage('#newBookForm', error.status);
+   console.error(error);
+ };
+
+
 const onCreationSuccess = function (data) {
   // hide modal and clear input
   $('#newBookModal').modal('hide');
@@ -151,5 +157,6 @@ module.exports = {
   exploreBooks,
   readingDisplay,
   onCreationSuccess,
+  onCreationFailure,
   onFailure,
 };
