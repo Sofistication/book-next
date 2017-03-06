@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Book.next</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags unless you know what you are doing -->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags unless you know what you are doing -->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body class="container-fluid">
+      <header>
+        <div class="row"><h1>Book.next</h1></div>
+      </header>
+      <nav>
+        <div class="row">
+          <div class="col-xs-6 initial-bar">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signInModal">
+              Sign In!
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Sign In</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form id="sign-in">
+                      <fieldset>
+                        <label>
+                          Email
+                          <input type="text" name="credentials[email]">
+                        </label>
+                        <label>
+                          Password
+                          <input type="password" name="credentials[password]">
+                        </label>
+                        <button type="submit" class="btn btn-primary">Sign In!</button>
+                      </fieldset>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-6 initial-bar">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signUpModal">
+              Sign Up!
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form id="sign-up">
+                      <fieldset>
+                        <label>
+                          Email
+                          <input type="text" name="credentials[email]">
+                        </label>
+                        <label>
+                          Password
+                          <input type="password" name="credentials[password]">
+                        </label>
+                        <label>
+                          Password Confirmation
+                          <input type="password" name="credentials[password_confirmation]">
+                        </label>
+                        <button type="submit" class="btn btn-primary">Sign Up!</button>
+                      </fieldset>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--- start hidden and reveal on sign in -->
+          <div class="col-xs-3 second-bar hidden">
+            <button type="button" class="btn btn-primary" id="get-list">My List</button>
+          </div>
+
+          <div class="col-xs-3 second-bar hidden">
+            <button type="button" class="btn btn-primary" id="explore-books">Explore Books</button>
+          </div>
+
+          <div class="col-xs-3 second-bar hidden">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePassModal">
+              Change Password!
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="changePassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="changePassModal">Change Password</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form id="change-password">
+                      <fieldset>
+                        <label>
+                          Current Password
+                          <input type="password" name="passwords[old]">
+                        </label>
+                        <label>
+                          New Password
+                          <input type="password" name="passwords[new]">
+                        </label>
+                        <button type="submit" class="btn btn-primary">Change Password!</button>
+                      </fieldset>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-3 second-bar hidden">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" id="sign-out">
+              Sign Out!
+            </button>
+          </div>
+        </div>
+      </nav>
+      <main>
+        <div class="list-container" id="list">
+        </div>
+      </main>
+    </body>
+</html>
