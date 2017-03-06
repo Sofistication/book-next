@@ -42,7 +42,7 @@ const onExploreBooks = function (event) {
     let data = getFormFields(event.target);
     api.createBook(data)
       .then(ui.onCreationSuccess)
-      .catch(ui.onCreateFailure);
+      .catch(ui.onFailure);
   });
 };
 
